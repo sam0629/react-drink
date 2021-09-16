@@ -9,7 +9,7 @@ class FilterProductTable extends React.Component {
         this.state = {
             filterText: "",
             drinksData: [],
-            cart: [1, 3]
+            cart: []
         }
         this.handleFilterTextchange = this.handleFilterTextchange.bind(this)
         this.handleAddCart = this.handleAddCart.bind(this)
@@ -18,6 +18,7 @@ class FilterProductTable extends React.Component {
         fetch('http://localhost:3001/drinks')
             .then(res => res.json())
             .then(data => {
+                console.log(data)
                 this.setState({ drinksData: data })
             })
     }
@@ -35,8 +36,9 @@ class FilterProductTable extends React.Component {
         return (
             <div className="filter-product-table">
                 <SearchBar filterText={this.state.filterText} onFilterTextChange={this.handleFilterTextchange} />
+                <Cart cart={this.state.cart} onHandleDeleteCart={this.handleAddCart} />
                 <ProductTable drinksData={this.state.drinksData} filterText={this.state.filterText} cart={this.state.cart} onHandleAddCart={this.handleAddCart} />
-                <Cart cart={this.state.cart} />
+
             </div>
         )
     }
